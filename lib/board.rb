@@ -13,6 +13,7 @@ class Board
       'There\'s already a ship at that position!'
     else
       @ships << ship
+      'ship has been placed'
     end
   end
 

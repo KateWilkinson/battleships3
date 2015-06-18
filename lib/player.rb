@@ -3,26 +3,28 @@ require_relative 'ship'
 
 class Player
 
-  attr_reader :hits
-  attr_reader :misses
+  # attr_reader :hits
+  # attr_reader :misses
+  attr_reader :guesses
 
 	def initialize board
     @board = board
-    @hits = []
-    @misses = []
+    @guesses = []
+    # @hits = []
+    # @misses = []
 	end
 
 	def place ship
     @board.add_ship ship
-		'ship has been placed'
 	end
 
   def fire target
+    guesses << target
     @board.shoot_at target
-    if 
-      hits << target
-    else
-      misses << target
-    end
   end
+
+  def lost?
+    @board.fleet_status == 'All ships are sunk' ? "You have lost" : 'Keep going!'
+  end
+
 end
