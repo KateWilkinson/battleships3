@@ -17,10 +17,8 @@ class Ship
   end
 
   def hit
-    @damage = @damage + 1
+    @damage += 1
     sunk?
       return "hit!"
   end
-
-
 end
