@@ -7,10 +7,11 @@ class Ship
     @position = position
     @size = size
     @hits = 0
+    @sunk = false
   end
 
   def sunk?
-    hits == size ? true : false
+    hits == size ? (@sunk = true) : (@sunk = false)
   end
 
 
