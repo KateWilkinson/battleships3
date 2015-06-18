@@ -9,7 +9,11 @@ class Board
   end
 
   def add_ship ship
-    @ships << ship
+    if ships.any?{|fleet| fleet.position == ship.position}
+      'There\'s already a ship at that position!'
+    else
+      @ships << ship
+    end
   end
 
   def shoot_at target
@@ -27,4 +31,5 @@ class Board
   def fleet_status
     ships.all? { |ship| ship.sunk? } ? 'All ships are sunk' : 'Not all ships are sunk'
   end
+
 end
