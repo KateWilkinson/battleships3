@@ -2,21 +2,20 @@ require 'board'
 
 describe Board do
 
-  let(:ship) {double :ship, position: 'B2' }
+  let(:ship) {double :ship, position: 'B2', size: 1, hit: nil, sunk: nil}
   before(:each) do
     subject.add_ship(ship)
   end
 
 
   it 'can have a ship' do
-    expect(subject.board).to include(ship)
+    expect(subject.ships).to include(ship)
   end
 
   describe 'shoot_at' do
 
-    it 'can receive a hit on a ship' do
-      subject.shoot_at 'B2'
-      expect(subject.board).not_to include(ship)
+    it 'can receive a hit on a board' do
+      expect(subject.shoot_at 'B2').to eq 'Hit!'
     end
 
     it 'reports message when no ship at position' do
@@ -25,15 +24,15 @@ describe Board do
 
   end
 
-  describe 'report' do
+  describe 'fleet status' do
 
     it 'reports if all ships are sunk' do
-      subject.shoot_at 'B2'
-      expect(subject.report).to eq 'All ships are sunk'
+      allow(ship).to receive (:sunk) {true}
+      expect(subject.fleet_status).to eq 'All ships are sunk'
     end
 
     it 'reports if not all ships are sunk' do
-      expect(subject.report).to eq 'Not all ships are sunk'
+      expect(subject.fleet_status).to eq 'Not all ships are sunk'
     end
 
   end

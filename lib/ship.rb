@@ -1,3 +1,5 @@
+require_relative 'board'
+
 class Ship
 
   attr_reader :position, :size

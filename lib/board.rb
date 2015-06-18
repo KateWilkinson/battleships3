@@ -2,34 +2,29 @@ require_relative 'ship'
 
 class Board
 
-  attr_reader :board
+  attr_reader :ships
 
   def initialize
-    @board = []
+    @ships = []
   end
 
   def add_ship ship
-    @board << ship
+    @ships << ship
   end
 
   def shoot_at target
-    if is_there_a_ship? target
-
-      board.delete_if { |ship| ship.position == target}
+    targeted_ship = ships.find do |ship|
+      ship.position == target
+    end
+    if targeted_ship
+      targeted_ship.hit
+      'Hit!'
     else
       'Missed!'
     end
   end
 
-  def report
-    return 'All ships are sunk' if @board.empty?
-    return 'Not all ships are sunk' if @board.empty? == false
+  def fleet_status
+    ships.all? { |ship| ship.sunk? } ? 'All ships are sunk' : 'Not all ships are sunk'
   end
-
-  private
-
-  def is_there_a_ship? target
-    board.any?{|ship| ship.position == target}
-  end
-
 end
