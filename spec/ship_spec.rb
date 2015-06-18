@@ -13,15 +13,15 @@ describe Ship do
     expect(ship.size).to eq 2
   end
 
-  it 'can record number of hits' do
-    expect(ship.hits).to eq 0
+  it 'can record damage' do
+    expect(ship.damage).to eq 0
   end
 
 describe 'hit' do
 
-  it 'increases the value of hits when it is hit' do
+  it 'increases the value of damage when it is hit' do
     ship.hit
-    expect(ship.hits).to eq 1
+    expect(ship.damage).to eq 1
   end
 
 end
